@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>爬蟲成果展示</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">返回首頁</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">關於我</a></li>
+							<li><a href="../photo/photo.html">攝影集</a></li>
+							<li><a href="generic.html">空拍作品</a></li>
+							<li class="active"><a href="elements.html">爬蟲成果展示</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.facebook.com/profile.php?id=100008253257148" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="https://www.instagram.com/lzhien_0125/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="https://github.com/jerrylee00125" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="mailto:s1120566@o365st.pu.edu.tw" class="icon fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<span class="date">爬蟲成果展示</span>
+								</header>
+									<h1 style="text-align:center;">爬蟲成果</h1>
+									<h2 style="text-align:center;">靜宜大學公告總覽</h2>
+								
+									<span class="image fit"><img src="images/A.jpg" alt="" /></span>
+									
+									<p style="text-align:center;"><i>目標爬取靜宜大學公告總覽的最新資訊及連結。</i></p><br><br>
+									
+								<header class="major">
+									<span class="date">程式碼</span>
+								</header>	
+									<h2>安裝並載入套件</h2>
+									<pre><code># -*- coding: utf-8 -*-
+"""
+pip install selenium webdriver_manager # 安裝套件
+"""
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException									
+									
+</code></pre><br>
+									<h2>執行程式碼</h2>
+									<pre><code>from selenium import webdriver
+import time
+
+options = webdriver.ChromeOptions()
+options.add_argument("--disable-blink-features=AutomationControlled")
+
+driver = webdriver.Chrome(
+    service=webdriver.chrome.service.Service(ChromeDriverManager().install()),
+    options=options
+)
+
+# 啟動瀏覽器 & 最大化視窗
+driver.get("https://www.pu.edu.tw/p/422-1000-1011.php?Lang=zh-tw")
+driver.maximize_window()
+
+# 模擬滾動頁面 2 次，以載入更多公告內容
+for _ in range(2):
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    time.sleep(2) # 等待 2 秒
+
+# 選取所有公告標題的 a 元素
+titles = driver.find_elements(By.CSS_SELECTOR, ".mtitle a")
+
+for t in titles:
+    print(t.text) # 顯示公告標題
+    print(t.get_attribute("href")) # 顯示該公告的網址
+    
+driver.quit()									
+									
+</code></pre><br>				
+								<header class="major">
+									<span class="date">輸出結果</span>
+								</header>
+									<h2>執行結果</h2>
+									<span class="image fit"><img src="images/B.jpg" alt="" /></span>
+									<p style="text-align:center;"><i>成功輸出公告標題及網址。</i></p><br><br>
+									
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>公告標題</th>
+													<th>網址</th>
+													
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>【職產處】勞動保障說明會 - 打工.實習.就業不可不知！</td>
+													<td>https://cdif.pu.edu.tw/p/404-1102-61910.php?Lang=zh-tw</td>
+													
+												</tr>
+												<tr>
+													<td>【綜合業務組】114學年度優久聯盟大學系統「國內交換學生」申請作業相關事宜</td>
+													<td>https://dorac.pu.edu.tw/var/file/59/1059/img/455/11_notice_20250502-2.pdf</td>
+													
+												</tr>
+												<tr>
+													<td>【綜合業務組】114學年度高雄科技大學系統「國內交換學生」申請作業相關事宜</td>
+													<td>https://dorac.pu.edu.tw/var/file/59/1059/img/455/11_notice_20250502-1.pdf</td>
+													
+												</tr>
+												<tr>
+													<td>【綜合業務組】<公告>114學年度學士班轉系通過學生名單</td>
+													<td>https://dorac.pu.edu.tw/p/405-1059-61820,c2966.php?Lang=zh-tw</td>
+													
+												</tr>
+												<tr>
+													<td>【圖書館】Turnitin 論文原創性比對系統教育訓練-檢查論文正確引用性、打造原創寫作力！</td>
+													<td>https://activity.pu.edu.tw/app/activity.php?ID=cHVfc2VtaW5hciZhY3Rpdml0eV9tZW51&Sn=3201</td>
+													
+												</tr>
+												<tr>
+													<td>more......</td>
+													<td>more......</td>
+													
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+
+
+
+					
+								
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Jerry Lee.</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
