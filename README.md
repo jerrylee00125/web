@@ -7,10 +7,10 @@
 [點我前往](https://jerrylee00125.github.io/web/web/html5up-massively/index.html)
 
 ## 頁面簡介
-- `index.html`: 首頁/關於我/專長&人格特質/學歷/興趣
-- `photo.html`: 攝影集/Cat
-- `generic.html`: 空拍作品/影片/景點介紹
-- `elements.html`: 爬蟲成果展示/靜宜大學公告總覽/程式碼/輸出結果
+- `index.html`: 首頁 / 關於我 / 專長&人格特質 / 學歷 / 興趣
+- `photo.html`: 攝影集 / Cat
+- `generic.html`: 空拍作品 / 影片 / 景點介紹
+- `elements.html`: 爬蟲成果展示 / 靜宜大學公告總覽 / 程式碼 / 輸出結果
 
 ## 使用技術
 HTML / CSS / GitHub Pages
