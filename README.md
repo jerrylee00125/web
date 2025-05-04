@@ -18,4 +18,4 @@ HTML / CSS / GitHub Pages
 ## 作者
 李志恩 ,
 靜宜大學 資料科學暨大數據分析與應用學系 ,
-聯絡方式:s1120566@o365st.pu.edu.tw
+聯絡方式 : s1120566@o365st.pu.edu.tw
