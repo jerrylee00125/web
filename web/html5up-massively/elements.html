@@ -59,7 +59,7 @@
 									<h2>安裝並載入套件</h2>
 									<pre><code># -*- coding: utf-8 -*-
 """
-pip install selenium webdriver_manager # 安裝套件
+pip install selenium webdriver_manager
 """
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -67,13 +67,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException									
+from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException
+import pandas as pd										
 									
 </code></pre><br>
 									<h2>執行程式碼</h2>
-									<pre><code>from selenium import webdriver
-import time
-
+									<pre><code># 靜宜大學公告總覽
 options = webdriver.ChromeOptions()
 options.add_argument("--disable-blink-features=AutomationControlled")
 
@@ -91,14 +90,25 @@ for _ in range(2):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     time.sleep(2) # 等待 2 秒
 
+# 存放所有資料的列表
+data_list = []
+
+
 # 選取所有公告標題的 a 元素
 titles = driver.find_elements(By.CSS_SELECTOR, ".mtitle a")
 
 for t in titles:
-    print(t.text) # 顯示公告標題
-    print(t.get_attribute("href")) # 顯示該公告的網址
+    title = t.text
+    link = t.get_attribute("href")
+    data_list.append({"公告": title, "網址": link})
+    print(title) # 顯示公告標題
+    print(link) # 顯示該公告的網址
     
-driver.quit()									
+driver.quit()
+
+# 轉為 DataFrame 並輸出成 CSV
+df = pd.DataFrame(data_list)
+df.to_csv(r"PU.csv", index=False, encoding="utf-8-sig")									
 									
 </code></pre><br>				
 								<header class="major">
@@ -108,49 +118,7 @@ driver.quit()
 									<span class="image fit"><img src="images/B.jpg" alt="" /></span>
 									<p style="text-align:center;"><i>成功輸出公告標題及網址。</i></p><br><br>
 									
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>公告標題</th>
-													<th>網址</th>
-													
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>【職產處】勞動保障說明會 - 打工.實習.就業不可不知！</td>
-													<td>https://cdif.pu.edu.tw/p/404-1102-61910.php?Lang=zh-tw</td>
-													
-												</tr>
-												<tr>
-													<td>【綜合業務組】114學年度優久聯盟大學系統「國內交換學生」申請作業相關事宜</td>
-													<td>https://dorac.pu.edu.tw/var/file/59/1059/img/455/11_notice_20250502-2.pdf</td>
-													
-												</tr>
-												<tr>
-													<td>【綜合業務組】114學年度高雄科技大學系統「國內交換學生」申請作業相關事宜</td>
-													<td>https://dorac.pu.edu.tw/var/file/59/1059/img/455/11_notice_20250502-1.pdf</td>
-													
-												</tr>
-												<tr>
-													<td>【綜合業務組】<公告>114學年度學士班轉系通過學生名單</td>
-													<td>https://dorac.pu.edu.tw/p/405-1059-61820,c2966.php?Lang=zh-tw</td>
-													
-												</tr>
-												<tr>
-													<td>【圖書館】Turnitin 論文原創性比對系統教育訓練-檢查論文正確引用性、打造原創寫作力！</td>
-													<td>https://activity.pu.edu.tw/app/activity.php?ID=cHVfc2VtaW5hciZhY3Rpdml0eV9tZW51&Sn=3201</td>
-													
-												</tr>
-												<tr>
-													<td>more......</td>
-													<td>more......</td>
-													
-												</tr>
-											</tbody>
-										</table>
-									</div>
+									
 
 
 
